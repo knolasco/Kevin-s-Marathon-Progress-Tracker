@@ -80,8 +80,9 @@ class ProgressDashboard:
     def plot_goal_comparison(self):
         self.filtered_df['Seconds_To_Goal'] = self.filtered_df['Avg_Pace_converted'].apply(lambda pace: (pace - self.goal_pace)*60)
         palette = {'Qualifying' : '#44BBA4',
-                    'Not Qualifying' : '#E94F37'}   
-        g = sns.scatterplot(data = self.filtered_df, x = 'Date', y = 'Seconds_To_Goal', hue = 'Boston_Qualifying', ax = self.axs[3], palette = palette, s = 100)
+                    'Not Qualifying' : '#E94F37'}
+        sns.lineplot(data = self.filtered_df, x = 'Date', y = 'Seconds_To_Goal', ax = self.axs[3], color = '#393E41', linewidth = 3)
+        sns.scatterplot(data = self.filtered_df, x = 'Date', y = 'Seconds_To_Goal', hue = 'Boston_Qualifying', ax = self.axs[3], palette = palette, s = 200)
         self.axs[3].set_title('Seconds per Mile to Qualify For Boston Marathon')
         self.axs[3].set_ylim(-120,120)
 
