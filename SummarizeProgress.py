@@ -55,7 +55,7 @@ class ProgressDashboard:
     # plot pace
     def plot_pace(self):
         # pivot df for graphing
-        self.df_m = self.filtered_df.melt(id_vars = ['Date'], value_vars = self.pace_cols, var_name = 'Pace', value_name = 'Minutes')
+        self.df_m = self.filtered_df.melt(id_vars = ['Date'], value_vars = self.pace_cols, var_name = 'Pace', value_name = 'Minutes Per Mile')
 
         # define palette
         palette = {'Fastest_Mile_converted' : '#44BBA4',
@@ -63,7 +63,7 @@ class ProgressDashboard:
                     'Avg_Pace_converted' : '#393E41',
                     'Goal_Avg_Pace_converted' : '#3F88C5'}
 
-        g = sns.lineplot(data = self.df_m, x = 'Date', y = 'Minutes', hue = 'Pace', ax = self.axs[1], legend = 'full', palette = palette, linewidth = 5)
+        g = sns.lineplot(data = self.df_m, x = 'Date', y = 'Minutes Per Mile', hue = 'Pace', ax = self.axs[1], legend = 'full', palette = palette, linewidth = 5)
         self.axs[1].plot([self.df_m['Date'].min(), self.df_m['Date'].max()], [self.goal_pace, self.goal_pace], 'k--')
         self.axs[1].text(sorted(self.df_m['Date'].unique())[-3], 6.5, 'Boston Marathon Qualifying Pace', fontsize = 12)
         self.axs[1].set_ylim(5.5, 9)
